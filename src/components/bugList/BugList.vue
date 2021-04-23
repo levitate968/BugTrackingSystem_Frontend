@@ -1,15 +1,26 @@
 <template>
   <div>
-    <el-table :data="tableData" style="width: 100%"  @row-click="bugTicketDetails">
+    <el-table stripe style="width: 100%"  @row-click="bugTicketDetails"
+              :data="tableData.filter(data => !search || data.designateName.toLowerCase().includes(search.toLowerCase()))">
       <el-table-column prop="bugId" label="编号" width="300"></el-table-column>
       <el-table-column prop="title" label="题目" width="300"></el-table-column>
       <el-table-column prop="submitName" label="创建人" width="120"></el-table-column>
-      <el-table-column prop="designateName" label="指派人" width="120"></el-table-column>
-      <el-table-column prop="statusName" label="状态" width="120"></el-table-column>
-      <el-table-column prop="bugLevel" label="级别" width="120"></el-table-column>
+      <el-table-column prop="designateName" label="处理人" width="120"></el-table-column>
+      <el-table-column prop="statusName" sortable label="状态" width="120"></el-table-column>
+      <el-table-column prop="bugLevel" sortable label="级别" width="120"></el-table-column>
+
+      <el-table-column align="right">
+        <template slot="header" slot-scope="scope">
+          <el-input
+            v-model="search"
+            size="mini"
+            placeholder="处理人搜索"/>
+        </template>
+      </el-table-column>
+
     </el-table>
     <el-row>
-      <el-button type="primary"><router-link to="/bugList/createBugTicket">添加</router-link></el-button>
+      <el-button type="primary" v-on:click="goCreate">添加</el-button>
     </el-row>
 
   </div>
@@ -23,8 +34,10 @@ import axios from 'axios'
     data() {
       return {
         myInstance: null,
-        tableData: []
+        tableData: [],
+        search: ''
       }
+
     },
 
     created() {
@@ -51,7 +64,9 @@ import axios from 'axios'
         //console.log(event);
         localStorage.setItem("bugTicket",JSON.stringify(row));
         this.$router.push("bugList/manageBugTicket");
-
+      },
+      goCreate(){
+        this.$router.push("bugList/createBugTicket");
       }
     }
   }

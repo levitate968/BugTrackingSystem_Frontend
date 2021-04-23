@@ -34,7 +34,7 @@
 
       <el-form-item>
         <el-button type="primary" v-on:click="createBugList('CreateForm')">创建</el-button>
-        <el-button type="primary"><router-link to="/bugList">返回</router-link></el-button>
+        <el-button type="primary" v-on:click="goBack">返回</el-button>
       </el-form-item>
 
 
@@ -125,6 +125,9 @@ export default {
         }
       })
     },
+    goBack() {
+      this.$router.push("/bugList");
+    }
 
   }
 }

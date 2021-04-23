@@ -2,11 +2,20 @@
   <div id="app">
     <el-container>
       <el-header v-show="$route.meta.isShow">
-        <el-menu  :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+        <el-menu  :default-active="activeIndex"
+                  class="el-menu-demo"
+                  mode="horizontal"
+                  @select="handleSelect"
+                  background-color="#34314c"
+                  text-color="#fff"
+                  active-text-color="#ffc952">
+<!--                  background-color="#64B0FF"-->
+<!--                  text-color="#6E6B93"-->
+<!--                  active-text-color="#FFFFFF"-->
+
           <el-menu-item index="/index">个人中心</el-menu-item>
           <el-menu-item index="/bugList">缺陷清单</el-menu-item>
           <el-menu-item index="/team">我的小组</el-menu-item>
-<!--          <el-menu-item index="/logout">退出登录</el-menu-item>-->
         </el-menu>
       </el-header>
       <el-main>

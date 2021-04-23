@@ -10,7 +10,7 @@
       </el-form-item>
       <el-form-item>
         <el-button type="primary" v-on:click="onSubmit('loginForm')">登录</el-button>
-        <el-button type="primary" ><router-link to="register">注册</router-link></el-button>
+        <el-button type="primary" v-on:click="register()">注册</el-button>
       </el-form-item>
     </el-form>
 
@@ -84,6 +84,9 @@ export default {
 
         console.log("点击确定时触发");
       });
+    },
+    register(){
+      this.$router.push("/register");
     }
   }
 }

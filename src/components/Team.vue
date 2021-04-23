@@ -1,9 +1,9 @@
 <template>
-  <el-table :data="tableData" style="width: 100%">
+  <el-table :data="tableData" stripe style="width: 100%">
     <el-table-column prop="empId" label="编号" width="300"></el-table-column>
-    <el-table-column prop="realName" label="用户名" width="180"></el-table-column>
-    <el-table-column prop="teamName" label="小组" width="180"></el-table-column>
-    <el-table-column prop="post" label="职位" width="180"></el-table-column>
+    <el-table-column prop="realName" label="用户名" width="120"></el-table-column>
+    <el-table-column prop="teamName" label="小组" width="200"></el-table-column>
+    <el-table-column prop="post" sortable label="职位" width="180"></el-table-column>
   </el-table>
 </template>
 
