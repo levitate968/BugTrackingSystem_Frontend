@@ -16,6 +16,13 @@
           <el-menu-item index="/index">个人中心</el-menu-item>
           <el-menu-item index="/bugList">缺陷清单</el-menu-item>
           <el-menu-item index="/team">我的小组</el-menu-item>
+
+          <el-submenu>
+            <template slot="title">数据跟踪</template>
+            <el-menu-item index="/chart/statusChart">完成情况</el-menu-item>
+            <el-menu-item index="2-2">选项2</el-menu-item>
+            <el-menu-item index="2-3">选项3</el-menu-item>
+          </el-submenu>
         </el-menu>
       </el-header>
       <el-main>

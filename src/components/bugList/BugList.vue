@@ -35,33 +35,35 @@ import axios from 'axios'
       return {
         myInstance: null,
         tableData: [],
-        search: ''
+        search: '',
+        employee:{},
+        query:{},
       }
 
     },
 
     created() {
-      this.myInstance = axios.create({
-        baseURL: 'http://localhost:8989/bugTicket/',
-        timeout: 1000
-      })
       this.getData()
     },
 
     methods: {
       getData() {
-        this.myInstance.post('findList', {
-          params: {
-            query: '',    // 查询参数
+        var employeeString=localStorage.getItem("employee");
+        this.employee=JSON.parse(employeeString);
+        this.query.userId=this.employee.empId;
+
+        this.$http.post("http://localhost:8989/bugTicket/findListByOrder", this.query).then(res => {
+          console.log(res.data);
+          if(res.data.code=="000"){
+            console.log(res.data.data);
+            this.tableData = res.data.data;
+          }else{
+            alert(res.data.data);
           }
-        }).then(res => {
-          this.tableData = res.data.data    // 表格数据
-          console.log(res.data)
-        })
+        });
       },
       bugTicketDetails(row, event, column){
         console.log(row);
-        //console.log(event);
         localStorage.setItem("bugTicket",JSON.stringify(row));
         this.$router.push("bugList/manageBugTicket");
       },

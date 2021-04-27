@@ -8,7 +8,7 @@
     <div class="text item">真实姓名：{{this.user.realName}}</div>
     <div class="text item">小组名程：{{this.user.teamName}}</div>
     <div class="text item">职位名称：{{this.user.post}}</div>
-    <div class="text item">待处理缺陷个数：{{}}</div>
+    <div class="text item">待处理缺陷个数：{{this.designateCount}}</div>
     <div style="padding: 14px;">
       <div class="bottom clearfix">
         <el-button type="text" v-on:click="changeInformation" class="button">修改信息</el-button>
@@ -34,11 +34,13 @@
           teamName:'',
           post:''
         },
+        designateCount:'',
         empId:'',
       }
     },
     created() {
       this.getInformation();
+      this.getDesignateCount();
     },
     methods: {
       logout(){
@@ -81,6 +83,25 @@
 
             this.user=res.data.data;
             console.log(this.user);
+          }else{
+            alert(res.data.data);
+          }
+        });
+      },
+      getDesignateCount(){
+        var employeeString=localStorage.getItem("employee");
+        if(employeeString){
+          this.employee=JSON.parse(employeeString);
+          this.empId=this.employee.empId;
+        }else{
+          alert("您尚未登录，点击确定跳转至登录页面")
+          this.$router.push("/login");
+        }
+        this.$http.get("http://localhost:8989/employee/getDesignateCount/"+this.empId).then(res => {
+          //console.log(res.data);
+          if(res.data.code=="000"){
+            this.designateCount=res.data.data;
+            console.log(this.designateCount);
           }else{
             alert(res.data.data);
           }

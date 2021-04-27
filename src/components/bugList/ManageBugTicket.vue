@@ -116,7 +116,7 @@ import axios from "axios";
 export default {
   name: "ManageBugTicket",
   data(){
-    bugTicket:{}
+
     return {
       showCheckForm: true,
       showCheckCard: true,
@@ -131,6 +131,7 @@ export default {
       query:{},
       bugId:'',
       bugTicketLines:[],
+      bugTicket:{},
 
       activities: [{
         content: '提交缺陷',
@@ -150,9 +151,6 @@ export default {
       },
 
       rules: {
-        // designateName: [
-        //   {required: true, message: '指派人不能为空', trigger: 'blur'}
-        // ],
         checkNote: [
           {required: true, message: '输入内容不能为空', trigger: 'blur'}
         ],
