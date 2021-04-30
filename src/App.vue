@@ -20,7 +20,7 @@
           <el-submenu>
             <template slot="title">数据跟踪</template>
             <el-menu-item index="/chart/statusChart">完成情况</el-menu-item>
-            <el-menu-item index="2-2">选项2</el-menu-item>
+            <el-menu-item index="/chart/employeeChart">解决数量</el-menu-item>
             <el-menu-item index="2-3">选项3</el-menu-item>
           </el-submenu>
         </el-menu>

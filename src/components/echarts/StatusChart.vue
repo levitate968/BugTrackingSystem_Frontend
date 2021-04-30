@@ -31,10 +31,7 @@ export default {
       dict:[],
     }
   },
-  created(){
-    //this.getData();
 
-  },
   mounted(){
     var employeeString=localStorage.getItem("employee");
     this.employee=JSON.parse(employeeString);
@@ -98,10 +95,6 @@ export default {
         ]
       });
     },
-    getData(){
-
-    },
-
   }
 }
 </script>

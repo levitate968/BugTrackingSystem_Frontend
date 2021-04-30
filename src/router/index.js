@@ -9,8 +9,8 @@ import CreateBugTicket from "../components/bugList/CreateBugTicket";
 import ManageBugTicket from "../components/bugList/ManageBugTicket";
 import ChangeInformation from "../components/index/ChangeInformation";
 import ChangePassword from "../components/index/ChangePassword";
-import example from "../components/echarts/example";
 import StatusChart from "../components/echarts/StatusChart";
+import EmployeeChart from "../components/echarts/EmployeeChart";
 
 Vue.use(Router)
 
@@ -23,6 +23,13 @@ export default new Router({
     {
       path:'/chart/statusChart',
       component:StatusChart,
+      meta:{
+        isShow:true
+      }
+    },
+    {
+      path:'/chart/employeeChart',
+      component:EmployeeChart,
       meta:{
         isShow:true
       }
