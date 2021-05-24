@@ -132,6 +132,7 @@ export default {
       bugId:'',
       bugTicketLines:[],
       bugTicket:{},
+      employee:{},
 
       activities: [{
         content: '提交缺陷',
@@ -161,11 +162,14 @@ export default {
     }
   },
   created() {
-    var employeeString=localStorage.getItem("employee");
+    let employeeString=localStorage.getItem("employee");
     if(employeeString){
-      var bugTicketString=localStorage.getItem("bugTicket");
+      let bugTicketString=localStorage.getItem("bugTicket");
       this.bugTicket=JSON.parse(bugTicketString);
-      var statusName=this.bugTicket.statusName;
+      let statusName=this.bugTicket.statusName;
+      this.employee=JSON.parse(employeeString);
+      let realName=this.employee.realName;
+      let designateName=this.bugTicket.designateName;
       this.bugId=this.bugTicket.bugId;
 
       this.query.bugId=this.bugTicket.bugId;
@@ -198,6 +202,9 @@ export default {
         this.showDealCard=false;
         this.showTimeline=false;
       }
+
+      this.authorizationManagement(statusName,realName,designateName);
+
     }else{
       alert("您尚未登录，点击确定跳转至登录页面")
       this.$router.push("/login");
@@ -214,6 +221,7 @@ export default {
         if (valid) {
           this.query.designateName=this.form.designateName;
           this.query.note=this.form.checkNote;
+          console.log(JSON.stringify(this.query));
           this.$http.post("http://localhost:8989/bugTicket/checkBugTicket", this.query).then(res => {
             console.log(res.data);
             if(res.data.code=="000"){
@@ -278,6 +286,57 @@ export default {
         }
       });
     },
+    authorizationManagement(statusName,realName,designateName){
+      if(realName==designateName){
+        if(statusName=="已提交"){
+          this.showCheckForm=true;
+          this.showCheckCard=false;
+          this.showDealForm=false;
+          this.showDealCard=false;
+        }else if(statusName=="已审核"){
+          this.showCheckForm=false;
+          this.showCheckCard=true;
+          this.showDealForm=true;
+          this.showDealCard=false;
+        }else if(statusName=="已解决"){
+          this.showCheckForm=false;
+          this.showCheckCard=true;
+          this.showDealForm=false;
+          this.showDealCard=true;
+        }
+        else if(statusName=="已驳回"){
+          this.showCheckForm=false;
+          this.showCheckCard=true;
+          this.showDealForm=false;
+          this.showDealCard=false;
+          this.showTimeline=false;
+        }
+      }else{
+        if(statusName=="已提交"){
+          this.showCheckForm=false;
+          this.showCheckCard=false;
+          this.showDealForm=false;
+          this.showDealCard=false;
+        }else if(statusName=="已审核"){
+          this.showCheckForm=false;
+          this.showCheckCard=true;
+          this.showDealForm=false;
+          this.showDealCard=false;
+        }else if(statusName=="已解决"){
+          this.showCheckForm=false;
+          this.showCheckCard=true;
+          this.showDealForm=false;
+          this.showDealCard=true;
+        }
+        else if(statusName=="已驳回"){
+          this.showCheckForm=false;
+          this.showCheckCard=true;
+          this.showDealForm=false;
+          this.showDealCard=false;
+          this.showTimeline=false;
+        }
+      }
+    }
   }
 }
 </script>
